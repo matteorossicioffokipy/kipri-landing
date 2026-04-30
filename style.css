@@ -436,33 +436,3 @@ footer { background:var(--black); padding:64px 56px 40px; }
   background: white;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
-
-/* ══════════════════════════════════════════
-   MOBILE SMALL (< 480px)
-══════════════════════════════════════════ */
-@media (max-width: 480px) {
-  .hero { padding: 40px 20px 80px; gap: 32px; }
-  .hero-title { font-size: 34px; }
-  .hero-sub { font-size: 15px; }
-  .btn-hero { padding: 13px 24px; font-size: 15px; width: 100%; text-align: center; }
-  .btn-demo { padding: 13px 20px; font-size: 14px; width: 100%; text-align: center; }
-  .hero-actions { flex-direction: column; width: 100%; }
-  .hero-trust { flex-direction: column; gap: 10px; align-items: flex-start; }
-  .phone-wrap { width: 230px; }
-  .mascotte-hero { width: 110px; right: -10px; bottom: -20px; }
-  .steps-grid { grid-template-columns: 1fr; }
-  .step { padding: 28px 20px; }
-  .step-num { font-size: 56px; }
-  .stat-big { font-size: 38px; }
-  .stat-box { padding: 24px 16px; }
-  .feat-card { padding: 22px 18px; }
-  .testi-card { padding: 22px 18px; }
-  .cta-wrap { padding: 80px 20px; }
-  .cta-title { font-size: 32px; }
-  .btn-white { padding: 14px 32px; font-size: 15px; }
-  .proof-logos { gap: 20px; }
-  .nav-cta .btn-ghost { display: none; }
-  .chat-box { padding: 14px; }
-  .msg { font-size: 12px; }
-  footer { padding: 40px 20px 28px; }
-}
