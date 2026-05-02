@@ -5,703 +5,515 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>KIPRI — Inizia gratis</title>
 <link rel="icon" type="image/png" href="assets/images/kipri-logo-favicon.png"/>
-<link rel="apple-touch-icon" href="assets/images/kipri-logo-favicon.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --purple: #5D5C9E;
-  --purple-dark: #3d3b7a;
-  --purple-light: #EEEEF8;
-  --green: #70C18E;
-  --green-light: #EEF8F2;
-  --text: #1E293B;
-  --text-muted: #475569;
-  --text-hint: #94A3B8;
-  --border: #E2E8F0;
-  --bg: #F8F9FF;
-  --white: #ffffff;
-  --radius: 16px;
-  --shadow: 0 2px 20px rgba(93,92,158,0.08);
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --purple:#5D5C9E;--purple-dark:#3d3b7a;--purple-light:#EEEEF8;
+  --green:#70C18E;--green-light:#EEF8F2;
+  --text:#1E293B;--muted:#475569;--hint:#94A3B8;
+  --border:#E2E8F0;--bg:#F8F9FF;
 }
-
-body {
-  font-family: 'Baloo 2', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-}
+body{font-family:'Baloo 2',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh;}
 
 /* NAV */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 24px;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 60px;
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 20px;height:58px;
+  display:flex;align-items:center;justify-content:space-between;
 }
-.nav-logo {
-  display: flex; align-items: center; gap: 8px;
-  text-decoration: none; font-size: 20px; font-weight: 800; color: var(--purple);
-}
-.nav-logo img { height: 28px; }
-.nav-back {
-  font-size: 13px; color: var(--text-muted); text-decoration: none;
-  display: flex; align-items: center; gap: 4px;
-}
-.nav-back:hover { color: var(--purple); }
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.nav-logo img{height:26px;width:auto;}
+.nav-logo-txt{font-size:18px;font-weight:800;color:var(--purple);}
+.nav-back{font-size:13px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:4px;}
+.nav-back:hover{color:var(--purple);}
 
-/* HERO STRIP */
-.hero-strip {
-  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
-  padding: 48px 24px 56px;
-  text-align: center;
-  position: relative; overflow: hidden;
+/* HERO */
+.hero{
+  background:linear-gradient(140deg,#3d3b7a 0%,var(--purple) 60%,#4a5fa0 100%);
+  padding:44px 20px 0;text-align:center;position:relative;overflow:hidden;
 }
-.hero-strip::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 130%, rgba(112,193,142,0.3) 0%, transparent 60%);
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 120%,rgba(112,193,142,.2) 0%,transparent 65%);
+  pointer-events:none;
 }
-.hero-strip-inner { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 100px; padding: 5px 14px;
-  font-size: 12px; font-weight: 700; color: white; letter-spacing: 0.5px;
-  margin-bottom: 20px;
+.hero-inner{position:relative;z-index:1;max-width:520px;margin:0 auto;}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);
+  border-radius:100px;padding:5px 14px;
+  font-size:11px;font-weight:700;color:white;letter-spacing:.8px;text-transform:uppercase;
+  margin-bottom:22px;
 }
-.badge-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-.hero-strip h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; color: white; line-height: 1.15; margin-bottom: 12px; }
-.hero-strip h1 span { color: #88C999; }
-.hero-strip p { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+.bdot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hero-logo{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:20px;}
+.hero-logo img{height:30px;width:auto;}
+.hero-logo-txt{font-size:22px;font-weight:800;color:white;}
+.hero h1{font-size:clamp(22px,5vw,36px);font-weight:800;color:white;line-height:1.2;margin-bottom:12px;}
+.hero h1 .hl{color:#88C999;}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.75);line-height:1.65;max-width:380px;margin:0 auto 30px;}
+.hero-mascot{display:block;width:150px;margin:0 auto -16px;position:relative;z-index:2;filter:drop-shadow(0 -5px 16px rgba(0,0,0,.2));}
 
-/* STEPS BAR */
-.steps-bar {
-  background: white;
-  border-bottom: 1px solid var(--border);
-  padding: 0 24px;
+/* PROGRESS WIZARD */
+.wizard{background:white;border-bottom:1px solid var(--border);padding:0 20px;}
+.wizard-inner{max-width:600px;margin:0 auto;display:flex;align-items:stretch;}
+.wstep{
+  flex:1;display:flex;align-items:center;gap:10px;
+  padding:14px 0;border-bottom:3px solid transparent;
+  transition:border-color .3s;cursor:default;
 }
-.steps-bar-inner {
-  max-width: 720px; margin: 0 auto;
-  display: flex; align-items: stretch;
+.wstep.done{border-bottom-color:var(--green);}
+.wstep.active{border-bottom-color:var(--purple);}
+.wnum{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;
+  background:var(--border);color:var(--muted);
+  transition:all .3s;
 }
-.step-tab {
-  flex: 1; display: flex; align-items: center; gap: 10px;
-  padding: 16px 0; position: relative;
-  border-bottom: 3px solid transparent;
-  transition: border-color 0.3s;
-}
-.step-tab.active { border-bottom-color: var(--purple); }
-.step-tab.done { border-bottom-color: var(--green); }
-.step-tab-num {
-  width: 28px; height: 28px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800; flex-shrink: 0;
-  background: var(--border); color: var(--text-muted);
-  transition: all 0.3s;
-}
-.step-tab.active .step-tab-num { background: var(--purple); color: white; }
-.step-tab.done .step-tab-num { background: var(--green); color: white; }
-.step-tab-label { font-size: 13px; font-weight: 700; color: var(--text-muted); }
-.step-tab.active .step-tab-label { color: var(--purple); }
-.step-tab.done .step-tab-label { color: var(--green); }
-.step-sep { width: 1px; background: var(--border); margin: 12px 16px; }
+.wstep.active .wnum{background:var(--purple);color:white;}
+.wstep.done .wnum{background:var(--green);color:white;}
+.wlabel{font-size:12px;font-weight:700;color:var(--muted);transition:color .3s;}
+.wstep.active .wlabel{color:var(--purple);}
+.wstep.done .wlabel{color:var(--green);}
+.wsep{width:1px;background:var(--border);margin:10px 12px;}
 
-/* MAIN LAYOUT */
-.main { max-width: 720px; margin: 0 auto; padding: 32px 24px 64px; }
+/* MAIN */
+.main{max-width:600px;margin:0 auto;padding:28px 18px 56px;}
 
-/* SECTION PANELS */
-.panel {
-  background: white; border-radius: 20px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  padding: 28px;
-  margin-bottom: 20px;
-  display: none;
+/* PANEL */
+.panel{display:none;animation:fadeUp .3s ease;}
+.panel.on{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* PANEL 1 */
+.intro{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+.steps-list{display:flex;flex-direction:column;gap:12px;margin-bottom:26px;}
+.sli{display:flex;gap:12px;align-items:flex-start;}
+.sli-n{
+  width:30px;height:30px;border-radius:9px;
+  background:var(--purple-light);color:var(--purple);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:13px;flex-shrink:0;margin-top:3px;
 }
-.panel.active { display: block; animation: fadeIn 0.3s ease; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.sli-t{font-size:13px;color:var(--muted);line-height:1.6;padding-top:5px;}
+.sli-t strong{color:var(--text);}
 
-/* PANEL 1 — INTRO + PLANS */
-.intro-text { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
+.plans-wrap{background:white;border-radius:20px;border:1px solid var(--border);padding:22px;box-shadow:0 2px 16px rgba(93,92,158,.07);margin-bottom:20px;}
+.plans-hd{margin-bottom:16px;}
+.plans-hd h3{font-size:17px;font-weight:800;color:var(--text);margin-bottom:3px;}
+.plans-hd p{font-size:13px;color:var(--muted);}
+.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:380px){.plans-grid{grid-template-columns:1fr;}}
+.plan{border-radius:16px;padding:16px;border:2px solid var(--border);position:relative;}
+.plan.pro{border-color:var(--purple);background:linear-gradient(155deg,#f8f8ff,#f0f0fb);}
+.plan-badge{position:absolute;top:-1px;right:12px;background:var(--purple);color:white;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:2px 8px;border-radius:0 0 7px 7px;}
+.plan-name{font-size:13px;font-weight:800;color:var(--text);margin-bottom:3px;}
+.plan-price{font-size:24px;font-weight:800;color:var(--purple);line-height:1;}
+.plan-price span{font-size:11px;font-weight:500;color:var(--muted);}
+.plan-desc{font-size:11px;color:var(--muted);margin:5px 0 12px;line-height:1.4;}
+.plan-feats{display:flex;flex-direction:column;gap:5px;}
+.pf{display:flex;gap:6px;align-items:flex-start;font-size:11px;color:var(--muted);line-height:1.4;}
+.pt{width:14px;height:14px;border-radius:3px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;}
+.plan:not(.pro) .pt{background:var(--green-light);color:#15803D;}
+.plan.pro .pt{background:var(--purple-light);color:var(--purple);}
+.pf.off{opacity:.35;}
+.pf.off .pt{background:#F1F5F9;color:#94A3B8;}
 
-.how-steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
-.how-step { display: flex; gap: 14px; align-items: flex-start; }
-.how-step-num {
-  width: 34px; height: 34px; border-radius: 10px;
-  background: var(--purple-light); color: var(--purple);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 14px; flex-shrink: 0;
+.go-btn{
+  width:100%;background:var(--purple);color:white;
+  border:none;border-radius:14px;padding:15px;
+  font-size:16px;font-weight:800;
+  font-family:'Baloo 2',sans-serif;cursor:pointer;
+  transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.how-step-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; padding-top: 6px; }
-.how-step-text strong { color: var(--text); }
+.go-btn:hover{background:var(--purple-dark);transform:translateY(-1px);}
 
-.plans-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
-.plans-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+/* PANEL 2 */
+.form-card{background:white;border-radius:20px;border:1px solid var(--border);padding:24px;box-shadow:0 2px 16px rgba(93,92,158,.07);margin-bottom:16px;}
+.form-hd{margin-bottom:22px;}
+.form-hd h2{font-size:18px;font-weight:800;color:var(--text);margin-bottom:5px;}
+.form-hd p{font-size:13px;color:var(--muted);line-height:1.6;}
 
-.plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media (max-width: 480px) { .plans-grid { grid-template-columns: 1fr; } }
-
-.plan-card {
-  border-radius: 16px; padding: 20px;
-  border: 2px solid var(--border);
-  position: relative; transition: border-color 0.2s;
+.fg{margin-bottom:14px;}
+.fl{font-size:11px;font-weight:700;color:#64748B;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px;}
+.fi{
+  width:100%;padding:12px 14px;
+  border-radius:12px;border:1.5px solid var(--border);
+  font-family:'Baloo 2',sans-serif;font-size:14px;color:var(--text);
+  outline:none;background:#F8FAFC;transition:border .2s;
 }
-.plan-card.pro {
-  border-color: var(--purple);
-  background: linear-gradient(135deg, #fafaff 0%, #f3f3ff 100%);
-}
-.plan-badge {
-  position: absolute; top: -1px; right: 16px;
-  background: var(--purple); color: white;
-  font-size: 10px; font-weight: 800; letter-spacing: 0.5px;
-  padding: 3px 10px; border-radius: 0 0 8px 8px;
-}
-.plan-name { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
-.plan-price { font-size: 26px; font-weight: 800; color: var(--purple); margin-bottom: 4px; }
-.plan-price span { font-size: 14px; font-weight: 500; color: var(--text-muted); }
-.plan-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5; }
-.plan-features { display: flex; flex-direction: column; gap: 8px; }
-.plan-feat { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--text-muted); line-height: 1.4; }
-.plan-feat-check {
-  width: 18px; height: 18px; border-radius: 5px; flex-shrink: 0; margin-top: 1px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 800;
-}
-.plan-card:not(.pro) .plan-feat-check { background: var(--green-light); color: #15803D; }
-.plan-card.pro .plan-feat-check { background: var(--purple-light); color: var(--purple); }
-.plan-feat.locked { opacity: 0.4; }
-.plan-feat.locked .plan-feat-check { background: #F1F5F9; color: #94A3B8; }
+.fi:focus{border-color:var(--purple);background:white;box-shadow:0 0 0 3px rgba(93,92,158,.08);}
+.fi::placeholder{color:var(--hint);}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:380px){.frow{grid-template-columns:1fr;}}
 
-.panel-cta {
-  width: 100%; margin-top: 24px;
-  background: var(--purple); color: white;
-  border: none; border-radius: 14px;
-  padding: 15px; font-size: 16px; font-weight: 800;
-  font-family: 'Baloo 2', sans-serif;
-  cursor: pointer; transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
+.privacy{
+  display:flex;gap:9px;align-items:flex-start;
+  background:var(--purple-light);border-radius:11px;padding:11px 13px;
+  font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:14px;
 }
-.panel-cta:hover { background: var(--purple-dark); transform: translateY(-1px); }
+.pi{font-size:15px;flex-shrink:0;margin-top:1px;}
 
-/* PANEL 2 — FORM */
-.form-header { margin-bottom: 24px; }
-.form-header h2 { font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
-.form-header p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+.err{background:#FEF2F2;border:1px solid #FECACA;border-radius:9px;padding:10px 13px;font-size:12px;color:#DC2626;margin-bottom:12px;display:none;}
 
-.form-group { margin-bottom: 16px; }
-.form-label { font-size: 12px; font-weight: 700; color: #64748B; display: block; margin-bottom: 6px; letter-spacing: 0.3px; text-transform: uppercase; }
-.form-input {
-  width: 100%; padding: 13px 16px;
-  border-radius: 12px; border: 1.5px solid var(--border);
-  font-family: 'Baloo 2', sans-serif; font-size: 15px; color: var(--text);
-  outline: none; background: #F8FAFC; transition: border 0.2s, background 0.2s;
+.sub-btn{
+  width:100%;background:var(--purple);color:white;
+  border:none;border-radius:13px;padding:14px;
+  font-size:15px;font-weight:800;
+  font-family:'Baloo 2',sans-serif;cursor:pointer;
+  transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.form-input:focus { border-color: var(--purple); background: white; box-shadow: 0 0 0 3px rgba(93,92,158,0.08); }
-.form-input::placeholder { color: var(--text-hint); }
-select.form-input { cursor: pointer; }
+.sub-btn:hover:not(:disabled){background:var(--purple-dark);transform:translateY(-1px);}
+.sub-btn:disabled{background:var(--hint);cursor:not-allowed;}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+.back-btn{background:none;border:none;font-family:'Baloo 2',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;display:block;margin:12px auto 0;text-align:center;}
+.back-btn:hover{color:var(--purple);}
 
-.privacy-note {
-  display: flex; gap: 10px; align-items: flex-start;
-  background: var(--purple-light); border-radius: 12px; padding: 12px 14px;
-  font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;
+/* PANEL 3 */
+.success-wrap{text-align:center;padding:16px 0;}
+.s-icon{
+  width:68px;height:68px;border-radius:22px;
+  background:var(--green-light);
+  font-size:30px;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 18px;
 }
-.privacy-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.success-wrap h2{font-size:22px;font-weight:800;color:var(--text);margin-bottom:8px;}
+.success-wrap p{font-size:14px;color:var(--muted);line-height:1.6;}
+.s-email{font-weight:800;color:var(--purple);margin:4px 0 8px;}
 
-.submit-btn {
-  width: 100%;
-  background: var(--purple); color: white;
-  border: none; border-radius: 14px;
-  padding: 15px; font-size: 16px; font-weight: 800;
-  font-family: 'Baloo 2', sans-serif;
-  cursor: pointer; transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
+.s-steps{background:var(--bg);border-radius:14px;padding:18px;margin:20px 0;text-align:left;}
+.ss{display:flex;gap:11px;align-items:flex-start;margin-bottom:11px;}
+.ss:last-child{margin-bottom:0;}
+.ss-n{
+  width:24px;height:24px;border-radius:7px;
+  background:var(--purple);color:white;
+  font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
-.submit-btn:hover:not(:disabled) { background: var(--purple-dark); transform: translateY(-1px); }
-.submit-btn:disabled { background: var(--text-hint); cursor: not-allowed; transform: none; }
+.ss-t{font-size:13px;color:var(--muted);line-height:1.5;padding-top:2px;}
+.ss-t strong{color:var(--text);}
 
-.form-error {
-  background: #FEF2F2; border: 1px solid #FECACA; border-radius: 10px;
-  padding: 10px 14px; font-size: 13px; color: #DC2626;
-  margin-bottom: 14px; display: none;
+.open-btn{
+  display:block;width:100%;
+  background:var(--purple);color:white;
+  border:none;border-radius:14px;padding:15px;
+  font-size:16px;font-weight:800;
+  font-family:'Baloo 2',sans-serif;
+  cursor:pointer;text-decoration:none;text-align:center;
+  transition:all .2s;margin-bottom:10px;
 }
+.open-btn:hover{background:var(--purple-dark);transform:translateY(-2px);}
+.s-note{font-size:11px;color:var(--hint);}
 
-/* PANEL 3 — SUCCESS */
-.success-wrap { text-align: center; padding: 20px 0; }
-.success-icon {
-  width: 72px; height: 72px; border-radius: 24px;
-  background: var(--green-light); color: #15803D;
-  font-size: 32px; display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 20px;
-}
-.success-wrap h2 { font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 10px; }
-.success-wrap p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 8px; }
-.success-email { font-weight: 700; color: var(--purple); }
-
-.success-steps { background: var(--bg); border-radius: 14px; padding: 20px; margin: 24px 0; text-align: left; }
-.success-step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
-.success-step:last-child { margin-bottom: 0; }
-.ss-num {
-  width: 26px; height: 26px; border-radius: 8px;
-  background: var(--purple); color: white;
-  font-size: 12px; font-weight: 800;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.ss-text { font-size: 14px; color: var(--text-muted); line-height: 1.5; padding-top: 3px; }
-.ss-text strong { color: var(--text); }
-
-.open-app-btn {
-  display: block; width: 100%;
-  background: var(--purple); color: white;
-  border: none; border-radius: 14px;
-  padding: 16px; font-size: 17px; font-weight: 800;
-  font-family: 'Baloo 2', sans-serif;
-  cursor: pointer; text-decoration: none; text-align: center;
-  transition: all 0.2s; margin-bottom: 12px;
-}
-.open-app-btn:hover { background: var(--purple-dark); transform: translateY(-2px); }
-.success-note { font-size: 12px; color: var(--text-hint); }
-
-/* LANG SWITCHER */
-.lang-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; }
-.lang-btn {
-  padding: 6px 14px; border-radius: 8px; border: 1.5px solid var(--border);
-  background: white; font-size: 13px; font-weight: 700; cursor: pointer;
-  font-family: 'Baloo 2', sans-serif; transition: all 0.2s;
-}
-.lang-btn.active { background: var(--purple); color: white; border-color: var(--purple); }
-
-/* FOOTER */
-footer {
-  text-align: center; padding: 24px;
-  font-size: 12px; color: var(--text-hint);
-  border-top: 1px solid var(--border);
-}
-footer a { color: var(--text-muted); text-decoration: none; }
-footer a:hover { color: var(--purple); }
-
-.spinner {
-  width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4);
-  border-top-color: white; border-radius: 50%;
-  animation: spin 0.7s linear infinite; display: none;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+footer{text-align:center;padding:18px;font-size:11px;color:var(--hint);border-top:1px solid var(--border);}
+footer a{color:var(--muted);text-decoration:none;}
+footer a:hover{color:var(--purple);}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
     <img src="assets/images/logo-kipri.png" alt="KIPRI" onerror="this.style.display='none'"/>
-    <span>Kipri</span>
+    <span class="nav-logo-txt">kipri</span>
   </a>
-  <a href="index.html" class="nav-back">← <span id="nav-back-label">Torna alla home</span></a>
+  <a href="index.html" class="nav-back" id="nav-back">← <span id="nav-back-lbl">Torna alla home</span></a>
 </nav>
 
-<!-- HERO -->
-<div class="hero-strip">
-  <div class="hero-strip-inner">
-    <div class="hero-badge"><div class="badge-dot"></div> <span id="hero-badge-text">Beta Gratuita · Accesso Immediato</span></div>
-    <h1 id="hero-title">Benvenuto in <span>KIPRI</span> 🦘</h1>
-    <p id="hero-sub">Sei a pochi passi dall'avere il tuo business sempre in tasca. Registrati in 30 secondi.</p>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="badge"><div class="bdot"></div><span id="hero-badge">Beta Gratuita · Accesso Immediato</span></div>
+    <div class="hero-logo">
+      <img src="assets/images/logo-kipri.png" alt="KIPRI" onerror="this.style.display='none'"/>
+      <span class="hero-logo-txt">kipri</span>
+    </div>
+    <h1 id="hero-h1">Benvenuto in <span class="hl">KIPRI</span></h1>
+    <p class="hero-sub" id="hero-sub">Registrati in 30 secondi e inizia subito a gestire il tuo business.</p>
+    <img class="hero-mascot" src="assets/images/kipri-mascot-happy.png" alt="" onerror="this.style.display='none'"/>
   </div>
 </div>
 
-<!-- STEPS BAR -->
-<div class="steps-bar">
-  <div class="steps-bar-inner">
-    <div class="step-tab active" id="tab-1">
-      <div class="step-tab-num">1</div>
-      <div class="step-tab-label" id="tab1-label">Scopri KIPRI</div>
-    </div>
-    <div class="step-sep"></div>
-    <div class="step-tab" id="tab-2">
-      <div class="step-tab-num">2</div>
-      <div class="step-tab-label" id="tab2-label">Registrati</div>
-    </div>
-    <div class="step-sep"></div>
-    <div class="step-tab" id="tab-3">
-      <div class="step-tab-num">3</div>
-      <div class="step-tab-label" id="tab3-label">Inizia subito</div>
-    </div>
+<!-- WIZARD PROGRESS -->
+<div class="wizard">
+  <div class="wizard-inner">
+    <div class="wstep active" id="ws1"><div class="wnum">1</div><div class="wlabel" id="wl1">Scopri KIPRI</div></div>
+    <div class="wsep"></div>
+    <div class="wstep" id="ws2"><div class="wnum">2</div><div class="wlabel" id="wl2">Registrati</div></div>
+    <div class="wsep"></div>
+    <div class="wstep" id="ws3"><div class="wnum">3</div><div class="wlabel" id="wl3">Inizia subito</div></div>
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-  <!-- LANG SWITCHER -->
-  <div class="lang-row">
-    <button class="lang-btn active" id="btn-it" onclick="setLang('it')">🇮🇹 Italiano</button>
-    <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
-  </div>
+  <!-- STEP 1 -->
+  <div class="panel on" id="p1">
+    <p class="intro" id="intro-txt">KIPRI è l'app gestionale per professionisti e piccole imprese in Italia e nel Regno Unito. Clienti, appuntamenti, promemoria WhatsApp e pagamenti — tutto in un posto, sempre nel tuo telefono.</p>
 
-  <!-- PANEL 1: INTRO + PLANS -->
-  <div class="panel active" id="panel-1">
+    <div class="steps-list">
+      <div class="sli"><div class="sli-n">1</div><div class="sli-t" id="how1"><strong>Registrati</strong> — inserisci nome, email e settore. Gratis, nessuna carta.</div></div>
+      <div class="sli"><div class="sli-n">2</div><div class="sli-t" id="how2"><strong>Configura il profilo</strong> — dati della tua attività in 2 minuti.</div></div>
+      <div class="sli"><div class="sli-n">3</div><div class="sli-t" id="how3"><strong>Inizia subito</strong> — aggiungi clienti, crea appuntamenti, attiva i promemoria.</div></div>
+    </div>
 
-    <p class="intro-text" id="intro-text">
-      KIPRI è l'app gestionale pensata per professionisti e piccole imprese in Italia e nel Regno Unito. Gestisci clienti, appuntamenti, promemoria WhatsApp e pagamenti — tutto in un unico posto, sempre nel tuo telefono.
-    </p>
-
-    <div class="how-steps">
-      <div class="how-step">
-        <div class="how-step-num">1</div>
-        <div class="how-step-text" id="how1"><strong>Crea il tuo account</strong> — registrati con email. Nessuna carta richiesta.</div>
+    <div class="plans-wrap">
+      <div class="plans-hd">
+        <h3 id="plans-title">Free vs Pro</h3>
+        <p id="plans-sub">Parti gratis, passa a Pro quando sei pronto.</p>
       </div>
-      <div class="how-step">
-        <div class="how-step-num">2</div>
-        <div class="how-step-text" id="how2"><strong>Configura il profilo</strong> — inserisci i dati della tua attività in 2 minuti.</div>
-      </div>
-      <div class="how-step">
-        <div class="how-step-num">3</div>
-        <div class="how-step-text" id="how3"><strong>Inizia subito</strong> — aggiungi clienti, crea appuntamenti e attiva i promemoria WhatsApp.</div>
+      <div class="plans-grid">
+        <div class="plan">
+          <div class="plan-name">Free</div>
+          <div class="plan-price" id="fp">€0 <span id="fp-per">/ sempre</span></div>
+          <div class="plan-desc" id="fp-desc">Perfetto per iniziare.</div>
+          <div class="plan-feats">
+            <div class="pf"><div class="pt">✓</div><span id="ff1">Fino a 20 clienti</span></div>
+            <div class="pf"><div class="pt">✓</div><span id="ff2">Calendario</span></div>
+            <div class="pf"><div class="pt">✓</div><span id="ff3">Promemoria WhatsApp</span></div>
+            <div class="pf"><div class="pt">✓</div><span id="ff4">Note clienti</span></div>
+            <div class="pf off"><div class="pt">—</div><span id="ff5">Fatture PDF</span></div>
+            <div class="pf off"><div class="pt">—</div><span id="ff6">Analytics</span></div>
+          </div>
+        </div>
+        <div class="plan pro">
+          <div class="plan-badge" id="pro-badge">PROSSIMAMENTE</div>
+          <div class="plan-name">Pro</div>
+          <div class="plan-price" id="pp">€5.99 <span id="pp-per">/ mese</span></div>
+          <div class="plan-desc" id="pp-desc">Cresci senza limiti.</div>
+          <div class="plan-feats">
+            <div class="pf"><div class="pt">✓</div><span id="pf1">Tutto di Free</span></div>
+            <div class="pf"><div class="pt">✓</div><span id="pf2">Clienti illimitati</span></div>
+            <div class="pf"><div class="pt">✓</div><span id="pf3">Fatture PDF</span></div>
+            <div class="pf"><div class="pt">✓</div><span id="pf4">Analytics avanzate</span></div>
+            <div class="pf"><div class="pt">✓</div><span id="pf5">Supporto prioritario</span></div>
+            <div class="pf"><div class="pt">✓</div><span id="pf6">Funzioni in anteprima</span></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="plans-title" id="plans-title">Free vs Pro — cosa include ogni piano</div>
-    <div class="plans-sub" id="plans-sub">Parti gratis, passa a Pro quando sei pronto.</div>
-
-    <div class="plans-grid">
-
-      <!-- FREE -->
-      <div class="plan-card">
-        <div class="plan-name" id="plan-free-name">Free</div>
-        <div class="plan-price">£0 <span id="plan-free-period">/ sempre</span></div>
-        <div class="plan-desc" id="plan-free-desc">Perfetto per iniziare. Nessuna carta.</div>
-        <div class="plan-features">
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="ff1">Fino a 20 clienti</span></div>
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="ff2">Calendario appuntamenti</span></div>
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="ff3">Promemoria WhatsApp</span></div>
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="ff4">Note clienti</span></div>
-          <div class="plan-feat locked"><div class="plan-feat-check">—</div><span id="ff5">Fatture PDF</span></div>
-          <div class="plan-feat locked"><div class="plan-feat-check">—</div><span id="ff6">Analytics avanzate</span></div>
-          <div class="plan-feat locked"><div class="plan-feat-check">—</div><span id="ff7">Clienti illimitati</span></div>
-        </div>
-      </div>
-
-      <!-- PRO -->
-      <div class="plan-card pro">
-        <div class="plan-badge" id="plan-badge">PROSSIMAMENTE</div>
-        <div class="plan-name" id="plan-pro-name">Pro</div>
-        <div class="plan-price">£9 <span id="plan-pro-period">/ mese</span></div>
-        <div class="plan-desc" id="plan-pro-desc">Per chi vuole crescere senza limiti.</div>
-        <div class="plan-features">
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="pf1">Tutto di Free</span></div>
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="pf2">Clienti illimitati</span></div>
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="pf3">Fatture PDF</span></div>
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="pf4">Analytics avanzate</span></div>
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="pf5">Export dati</span></div>
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="pf6">Supporto prioritario</span></div>
-          <div class="plan-feat"><div class="plan-feat-check">✓</div><span id="pf7">Nuove funzioni in anteprima</span></div>
-        </div>
-      </div>
-
-    </div>
-
-    <button class="panel-cta" onclick="goToStep(2)" id="cta-step1">
-      <span id="cta-step1-text">Registrati gratis →</span>
+    <button class="go-btn" onclick="goStep(2)">
+      <span id="cta1-txt">Registrati gratis →</span>
     </button>
-
   </div>
 
-  <!-- PANEL 2: FORM -->
-  <div class="panel" id="panel-2">
-    <div class="form-header">
-      <h2 id="form-title">Crea il tuo account gratuito</h2>
-      <p id="form-sub">Registrati in 30 secondi. Ti mandiamo subito una email di conferma.</p>
-    </div>
-
-    <div class="form-error" id="form-error"></div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label" id="label-name">Nome</label>
-        <input class="form-input" id="input-name" type="text" placeholder="Mario Rossi" autocomplete="name"/>
+  <!-- STEP 2 -->
+  <div class="panel" id="p2">
+    <div class="form-card">
+      <div class="form-hd">
+        <h2 id="form-title">Crea il tuo account gratuito</h2>
+        <p id="form-sub">Registrati in 30 secondi. Ti inviamo subito una email di conferma.</p>
       </div>
-      <div class="form-group">
-        <label class="form-label" id="label-email">Email</label>
-        <input class="form-input" id="input-email" type="email" placeholder="mario@email.com" autocomplete="email"/>
+      <div class="err" id="err-msg"></div>
+      <div class="frow">
+        <div class="fg"><label class="fl" id="lb-name">Nome</label><input class="fi" id="inp-name" type="text" placeholder="Mario Rossi" autocomplete="name"/></div>
+        <div class="fg"><label class="fl" id="lb-email">Email</label><input class="fi" id="inp-email" type="email" placeholder="mario@email.com" autocomplete="email"/></div>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" id="label-profession">Professione / Settore</label>
-      <select class="form-input" id="input-profession">
-        <option value="" id="prof-placeholder">Seleziona il tuo settore...</option>
-        <option value="barber">💈 Barbiere / Parrucchiere</option>
-        <option value="beauty">💅 Centro Estetico / Beauty</option>
-        <option value="trainer">🏋️ Personal Trainer / Fitness</option>
-        <option value="dental">🦷 Studio Dentistico</option>
-        <option value="tattoo">🎨 Tattoo Studio</option>
-        <option value="consulenza">💼 Consulenza / Coaching</option>
-        <option value="artigiano">🔧 Artigiano / Tecnico</option>
-        <option value="medico">⚕️ Medico / Terapista</option>
-        <option value="altro">📌 Altro</option>
-      </select>
-    </div>
-
-    <div class="privacy-note">
-      <span class="privacy-icon">🔒</span>
-      <span id="privacy-text">I tuoi dati sono al sicuro. Non li condividiamo con nessuno e non mandiamo spam. Puoi cancellarti in qualsiasi momento.</span>
-    </div>
-
-    <button class="submit-btn" id="submit-btn" onclick="submitForm()">
-      <span id="submit-text">Crea account gratuito →</span>
-      <div class="spinner" id="spinner"></div>
-    </button>
-
-    <div style="text-align:center; margin-top:14px;">
-      <button onclick="goToStep(1)" style="background:none;border:none;font-family:'Baloo 2',sans-serif;font-size:13px;color:var(--text-muted);cursor:pointer;" id="back-btn">← Torna indietro</button>
+      <div class="fg">
+        <label class="fl" id="lb-prof">Professione / Settore</label>
+        <select class="fi" id="inp-prof">
+          <option value="" id="prof0">Seleziona il tuo settore...</option>
+          <option value="barber">💈 Barbiere / Parrucchiere</option>
+          <option value="beauty">💅 Centro Estetico / Beauty</option>
+          <option value="trainer">🏋️ Personal Trainer / Fitness</option>
+          <option value="dental">🦷 Studio Dentistico</option>
+          <option value="tattoo">🎨 Tattoo Studio</option>
+          <option value="consulenza">💼 Consulenza / Coaching</option>
+          <option value="artigiano">🔧 Artigiano / Tecnico</option>
+          <option value="medico">⚕️ Medico / Terapista</option>
+          <option value="altro">📌 Altro</option>
+        </select>
+      </div>
+      <div class="privacy">
+        <span class="pi">🔒</span>
+        <span id="privacy-txt">I tuoi dati sono al sicuro. Niente spam, niente condivisioni. Puoi cancellarti in qualsiasi momento.</span>
+      </div>
+      <button class="sub-btn" id="sub-btn" onclick="submitForm()">
+        <span id="sub-txt">Crea account gratuito →</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+      <button class="back-btn" onclick="goStep(1)" id="back-btn">← Torna indietro</button>
     </div>
   </div>
 
-  <!-- PANEL 3: SUCCESS -->
-  <div class="panel" id="panel-3">
-    <div class="success-wrap">
-      <div class="success-icon">🎉</div>
-      <h2 id="success-title">Benvenuto in KIPRI!</h2>
-      <p id="success-msg1">Account creato con successo. Abbiamo inviato una email di conferma a</p>
-      <p class="success-email" id="success-email-display"></p>
-      <p id="success-msg2" style="margin-top:8px;">Controlla la tua inbox (e la cartella spam, per sicurezza).</p>
-
-      <div class="success-steps">
-        <div class="success-step">
-          <div class="ss-num">1</div>
-          <div class="ss-text" id="ss1"><strong>Controlla la email</strong> — trovi la conferma con il link per accedere.</div>
+  <!-- STEP 3 -->
+  <div class="panel" id="p3">
+    <div class="form-card">
+      <div class="success-wrap">
+        <div class="s-icon">🎉</div>
+        <h2 id="s-title">Benvenuto in KIPRI!</h2>
+        <p id="s-msg1">Account creato con successo. Abbiamo inviato una conferma a</p>
+        <p class="s-email" id="s-email"></p>
+        <p id="s-msg2">Controlla la tua inbox (e la cartella spam, per sicurezza).</p>
+        <div class="s-steps">
+          <div class="ss"><div class="ss-n">1</div><div class="ss-t" id="ss1"><strong>Controlla la email</strong> — trovi il link per accedere.</div></div>
+          <div class="ss"><div class="ss-n">2</div><div class="ss-t" id="ss2"><strong>Apri l'app</strong> — clicca il bottone qui sotto.</div></div>
+          <div class="ss"><div class="ss-n">3</div><div class="ss-t" id="ss3"><strong>Configura il profilo</strong> — 2 minuti e sei operativo.</div></div>
         </div>
-        <div class="success-step">
-          <div class="ss-num">2</div>
-          <div class="ss-text" id="ss2"><strong>Apri l'app</strong> — clicca il bottone qui sotto e crea la tua password.</div>
-        </div>
-        <div class="success-step">
-          <div class="ss-num">3</div>
-          <div class="ss-text" id="ss3"><strong>Configura il profilo</strong> — ci vogliono 2 minuti per essere operativo.</div>
-        </div>
+        <a href="https://kipri.app" class="open-btn" id="open-btn">Apri KIPRI →</a>
+        <p class="s-note" id="s-note">Gratuito durante tutta la beta · Nessuna carta richiesta</p>
       </div>
-
-      <a href="https://kipri.app" class="open-app-btn" id="open-app-btn">Apri KIPRI →</a>
-      <p class="success-note" id="success-note">Gratuito durante tutta la beta · Nessuna carta richiesta</p>
     </div>
   </div>
 
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <span id="footer-copy">© 2026 KIPRI. Tutti i diritti riservati.</span> ·
-  <a href="#">Privacy</a> · <a href="#">Termini</a> · <a href="mailto:kipri@kipri.app">Contatti</a>
-</footer>
+<footer>© 2026 KIPRI · <a href="https://kipri.app">kipri.app</a> · <a href="mailto:kipri@kipri.app">kipri@kipri.app</a></footer>
 
 <script>
-const SUPABASE_URL = 'https://tisfpjvwmkzbwedpuoww.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpc2ZwanZ3bWt6YndlZHB1b3d3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1OTkwNzIsImV4cCI6MjA5MjE3NTA3Mn0.Mv_0KxpRqwTbKceom8dRNCRW5WVWnFd1b2YuqW-rSPQ';
+const SUPA_URL='https://tisfpjvwmkzbwedpuoww.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpc2ZwanZ3bWt6YndlZHB1b3d3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1OTkwNzIsImV4cCI6MjA5MjE3NTA3Mn0.Mv_0KxpRqwTbKceom8dRNCRW5WVWnFd1b2YuqW-rSPQ';
 
-// ── TRANSLATIONS ─────────────────────────────────────────────────────────────
-const T = {
-  it: {
-    'nav-back-label': 'Torna alla home',
-    'hero-badge-text': 'Beta Gratuita · Accesso Immediato',
-    'hero-title': 'Benvenuto in <span>KIPRI</span> 🦘',
-    'hero-sub': 'Sei a pochi passi dall\'avere il tuo business sempre in tasca. Registrati in 30 secondi.',
-    'tab1-label': 'Scopri KIPRI',
-    'tab2-label': 'Registrati',
-    'tab3-label': 'Inizia subito',
-    'intro-text': 'KIPRI è l\'app gestionale pensata per professionisti e piccole imprese in Italia e nel Regno Unito. Gestisci clienti, appuntamenti, promemoria WhatsApp e pagamenti — tutto in un unico posto, sempre nel tuo telefono.',
-    'how1': '<strong>Crea il tuo account</strong> — registrati con email. Nessuna carta richiesta.',
-    'how2': '<strong>Configura il profilo</strong> — inserisci i dati della tua attività in 2 minuti.',
-    'how3': '<strong>Inizia subito</strong> — aggiungi clienti, crea appuntamenti e attiva i promemoria WhatsApp.',
-    'plans-title': 'Free vs Pro — cosa include ogni piano',
-    'plans-sub': 'Parti gratis, passa a Pro quando sei pronto.',
-    'plan-free-name': 'Free', 'plan-free-period': '/ sempre', 'plan-free-desc': 'Perfetto per iniziare. Nessuna carta.',
-    'plan-pro-name': 'Pro', 'plan-pro-period': '/ mese', 'plan-pro-desc': 'Per chi vuole crescere senza limiti.',
-    'plan-badge': 'PROSSIMAMENTE',
-    'ff1':'Fino a 20 clienti','ff2':'Calendario appuntamenti','ff3':'Promemoria WhatsApp','ff4':'Note clienti','ff5':'Fatture PDF','ff6':'Analytics avanzate','ff7':'Clienti illimitati',
-    'pf1':'Tutto di Free','pf2':'Clienti illimitati','pf3':'Fatture PDF','pf4':'Analytics avanzate','pf5':'Export dati','pf6':'Supporto prioritario','pf7':'Nuove funzioni in anteprima',
-    'cta-step1-text': 'Registrati gratis →',
-    'form-title': 'Crea il tuo account gratuito',
-    'form-sub': 'Registrati in 30 secondi. Ti mandiamo subito una email di conferma.',
-    'label-name': 'Nome', 'label-email': 'Email', 'label-profession': 'Professione / Settore',
-    'prof-placeholder': 'Seleziona il tuo settore...',
-    'privacy-text': 'I tuoi dati sono al sicuro. Non li condividiamo con nessuno e non mandiamo spam. Puoi cancellarti in qualsiasi momento.',
-    'submit-text': 'Crea account gratuito →',
-    'back-btn': '← Torna indietro',
-    'success-title': 'Benvenuto in KIPRI!',
-    'success-msg1': 'Account creato con successo. Abbiamo inviato una email di conferma a',
-    'success-msg2': 'Controlla la tua inbox (e la cartella spam, per sicurezza).',
-    'ss1': '<strong>Controlla la email</strong> — trovi la conferma con il link per accedere.',
-    'ss2': '<strong>Apri l\'app</strong> — clicca il bottone qui sotto e crea la tua password.',
-    'ss3': '<strong>Configura il profilo</strong> — ci vogliono 2 minuti per essere operativo.',
-    'open-app-btn': 'Apri KIPRI →',
-    'success-note': 'Gratuito durante tutta la beta · Nessuna carta richiesta',
-    'footer-copy': '© 2026 KIPRI. Tutti i diritti riservati.',
-    'err-name': 'Inserisci il tuo nome.',
-    'err-email': 'Inserisci un\'email valida.',
-    'err-profession': 'Seleziona il tuo settore.',
-    'err-server': 'Errore durante la registrazione. Riprova o scrivici a kipri@kipri.app',
-    'loading': 'Creazione account...',
+const T={
+  it:{
+    'hero-badge':'Beta Gratuita · Accesso Immediato',
+    'hero-h1':'Benvenuto in <span class="hl">KIPRI</span>',
+    'hero-sub':'Registrati in 30 secondi e inizia subito a gestire il tuo business.',
+    'nav-back-lbl':'Torna alla home',
+    'wl1':'Scopri KIPRI','wl2':'Registrati','wl3':'Inizia subito',
+    'intro-txt':'KIPRI è l\'app gestionale per professionisti e piccole imprese in Italia e nel Regno Unito. Clienti, appuntamenti, promemoria WhatsApp e pagamenti — tutto in un posto, sempre nel tuo telefono.',
+    'how1':'<strong>Registrati</strong> — inserisci nome, email e settore. Gratis, nessuna carta.',
+    'how2':'<strong>Configura il profilo</strong> — dati della tua attività in 2 minuti.',
+    'how3':'<strong>Inizia subito</strong> — aggiungi clienti, crea appuntamenti, attiva i promemoria.',
+    'plans-title':'Free vs Pro','plans-sub':'Parti gratis, passa a Pro quando sei pronto.',
+    'freePrice':'€0','fp-per':'/ sempre','fp-desc':'Perfetto per iniziare.',
+    'proPrice':'€5.99','pp-per':'/ mese','pp-desc':'Cresci senza limiti.','pro-badge':'PROSSIMAMENTE',
+    'ff1':'Fino a 20 clienti','ff2':'Calendario','ff3':'Promemoria WhatsApp','ff4':'Note clienti','ff5':'Fatture PDF','ff6':'Analytics',
+    'pf1':'Tutto di Free','pf2':'Clienti illimitati','pf3':'Fatture PDF','pf4':'Analytics avanzate','pf5':'Supporto prioritario','pf6':'Funzioni in anteprima',
+    'cta1-txt':'Registrati gratis →',
+    'form-title':'Crea il tuo account gratuito',
+    'form-sub':'Registrati in 30 secondi. Ti inviamo subito una email di conferma.',
+    'lb-name':'Nome','lb-email':'Email','lb-prof':'Professione / Settore',
+    'prof0':'Seleziona il tuo settore...',
+    'privacy-txt':'I tuoi dati sono al sicuro. Niente spam, niente condivisioni. Puoi cancellarti in qualsiasi momento.',
+    'sub-txt':'Crea account gratuito →','back-btn':'← Torna indietro',
+    'err-name':'Inserisci il tuo nome.','err-email':'Inserisci un\'email valida.','err-prof':'Seleziona il tuo settore.',
+    'err-server':'Errore. Riprova o scrivi a kipri@kipri.app',
+    'loading':'Creazione account...',
+    's-title':'Benvenuto in KIPRI!',
+    's-msg1':'Account creato. Abbiamo inviato una conferma a',
+    's-msg2':'Controlla la inbox (e la cartella spam, per sicurezza).',
+    'ss1':'<strong>Controlla la email</strong> — trovi il link per accedere.',
+    'ss2':'<strong>Apri l\'app</strong> — clicca il bottone qui sotto.',
+    'ss3':'<strong>Configura il profilo</strong> — 2 minuti e sei operativo.',
+    'open-btn':'Apri KIPRI →',
+    's-note':'Gratuito durante tutta la beta · Nessuna carta richiesta',
+    'mailSub':'Benvenuto in KIPRI! Il tuo account è pronto 🦘',
+    'mailBody':(n)=>`Ciao ${n}!\n\nGrazie per esserti registrato a KIPRI.\n\nApri l'app ora:\nhttps://kipri.app\n\nPer domande rispondi a questa email.\n\nBenvenuto nel team KIPRI 🦘\n— Matteo e il team KIPRI`,
   },
-  en: {
-    'nav-back-label': 'Back to home',
-    'hero-badge-text': 'Free Beta · Instant Access',
-    'hero-title': 'Welcome to <span>KIPRI</span> 🦘',
-    'hero-sub': 'You\'re minutes away from having your business always in your pocket. Sign up in 30 seconds.',
-    'tab1-label': 'Discover KIPRI',
-    'tab2-label': 'Sign up',
-    'tab3-label': 'Get started',
-    'intro-text': 'KIPRI is the management app built for professionals and small businesses in Italy and the UK. Manage clients, appointments, WhatsApp reminders and payments — all in one place, always in your pocket.',
-    'how1': '<strong>Create your account</strong> — sign up with email. No card required.',
-    'how2': '<strong>Set up your profile</strong> — enter your business details in 2 minutes.',
-    'how3': '<strong>Get started</strong> — add clients, create appointments and enable WhatsApp reminders.',
-    'plans-title': 'Free vs Pro — what\'s included',
-    'plans-sub': 'Start free, upgrade to Pro when you\'re ready.',
-    'plan-free-name': 'Free', 'plan-free-period': '/ forever', 'plan-free-desc': 'Perfect to get started. No card.',
-    'plan-pro-name': 'Pro', 'plan-pro-period': '/ month', 'plan-pro-desc': 'For those who want to grow without limits.',
-    'plan-badge': 'COMING SOON',
-    'ff1':'Up to 20 clients','ff2':'Appointment calendar','ff3':'WhatsApp reminders','ff4':'Client notes','ff5':'PDF invoices','ff6':'Advanced analytics','ff7':'Unlimited clients',
-    'pf1':'Everything in Free','pf2':'Unlimited clients','pf3':'PDF invoices','pf4':'Advanced analytics','pf5':'Data export','pf6':'Priority support','pf7':'Early access to new features',
-    'cta-step1-text': 'Sign up for free →',
-    'form-title': 'Create your free account',
-    'form-sub': 'Sign up in 30 seconds. We\'ll send you a confirmation email right away.',
-    'label-name': 'Name', 'label-email': 'Email', 'label-profession': 'Profession / Sector',
-    'prof-placeholder': 'Select your sector...',
-    'privacy-text': 'Your data is safe. We never share it with anyone and we don\'t send spam. You can unsubscribe at any time.',
-    'submit-text': 'Create free account →',
-    'back-btn': '← Go back',
-    'success-title': 'Welcome to KIPRI!',
-    'success-msg1': 'Account created successfully. We sent a confirmation email to',
-    'success-msg2': 'Check your inbox (and spam folder, just in case).',
-    'ss1': '<strong>Check your email</strong> — you\'ll find the confirmation with your login link.',
-    'ss2': '<strong>Open the app</strong> — click the button below and create your password.',
-    'ss3': '<strong>Set up your profile</strong> — it takes 2 minutes to be up and running.',
-    'open-app-btn': 'Open KIPRI →',
-    'success-note': 'Free throughout the beta · No card required',
-    'footer-copy': '© 2026 KIPRI. All rights reserved.',
-    'err-name': 'Please enter your name.',
-    'err-email': 'Please enter a valid email.',
-    'err-profession': 'Please select your sector.',
-    'err-server': 'Registration error. Please try again or email us at kipri@kipri.app',
-    'loading': 'Creating account...',
+  en:{
+    'hero-badge':'Free Beta · Instant Access',
+    'hero-h1':'Welcome to <span class="hl">KIPRI</span>',
+    'hero-sub':'Sign up in 30 seconds and start managing your business right away.',
+    'nav-back-lbl':'Back to home',
+    'wl1':'Discover KIPRI','wl2':'Sign up','wl3':'Get started',
+    'intro-txt':'KIPRI is the management app for professionals and small businesses in Italy and the UK. Clients, appointments, WhatsApp reminders and payments — all in one place, always in your pocket.',
+    'how1':'<strong>Sign up</strong> — name, email and sector. Free, no card.',
+    'how2':'<strong>Set up your profile</strong> — business details in 2 minutes.',
+    'how3':'<strong>Get started</strong> — add clients, create appointments, enable reminders.',
+    'plans-title':'Free vs Pro','plans-sub':'Start free, upgrade to Pro when you\'re ready.',
+    'freePrice':'£0','fp-per':'/ forever','fp-desc':'Perfect to get started.',
+    'proPrice':'£5.99','pp-per':'/ month','pp-desc':'Grow without limits.','pro-badge':'COMING SOON',
+    'ff1':'Up to 20 clients','ff2':'Calendar','ff3':'WhatsApp reminders','ff4':'Client notes','ff5':'PDF invoices','ff6':'Analytics',
+    'pf1':'Everything in Free','pf2':'Unlimited clients','pf3':'PDF invoices','pf4':'Advanced analytics','pf5':'Priority support','pf6':'Early access to features',
+    'cta1-txt':'Sign up for free →',
+    'form-title':'Create your free account',
+    'form-sub':'Sign up in 30 seconds. We\'ll send you a confirmation email right away.',
+    'lb-name':'Name','lb-email':'Email','lb-prof':'Profession / Sector',
+    'prof0':'Select your sector...',
+    'privacy-txt':'Your data is safe. No spam, no sharing. You can unsubscribe at any time.',
+    'sub-txt':'Create free account →','back-btn':'← Go back',
+    'err-name':'Please enter your name.','err-email':'Please enter a valid email.','err-prof':'Please select your sector.',
+    'err-server':'Error. Please try again or email kipri@kipri.app',
+    'loading':'Creating account...',
+    's-title':'Welcome to KIPRI!',
+    's-msg1':'Account created. We sent a confirmation to',
+    's-msg2':'Check your inbox (and spam folder, just in case).',
+    'ss1':'<strong>Check your email</strong> — you\'ll find the login link.',
+    'ss2':'<strong>Open the app</strong> — click the button below.',
+    'ss3':'<strong>Set up your profile</strong> — 2 minutes to get started.',
+    'open-btn':'Open KIPRI →',
+    's-note':'Free throughout the beta · No card required',
+    'mailSub':'Welcome to KIPRI! Your account is ready 🦘',
+    'mailBody':(n)=>`Hi ${n}!\n\nThank you for signing up for KIPRI.\n\nOpen the app now:\nhttps://kipri.app\n\nQuestions? Just reply to this email.\n\nWelcome to the KIPRI team 🦘\n— Matteo and the KIPRI team`,
   }
 };
 
-let lang = localStorage.getItem('kipri_lang') || 'it';
-
-function setLang(l) {
-  lang = l;
-  localStorage.setItem('kipri_lang', l);
-  document.getElementById('btn-it').classList.toggle('active', l === 'it');
-  document.getElementById('btn-en').classList.toggle('active', l === 'en');
-  const t = T[l];
-  Object.keys(t).forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = t[id];
-  });
-  // Update profession placeholder
-  document.getElementById('prof-placeholder').textContent = t['prof-placeholder'];
+function getLang(){
+  const p=new URLSearchParams(window.location.search).get('lang');
+  if(p==='en'||p==='it'){localStorage.setItem('kipri_lang',p);return p;}
+  return localStorage.getItem('kipri_lang')||'it';
 }
 
-function goToStep(step) {
-  [1,2,3].forEach(i => {
-    document.getElementById('panel-' + i).classList.toggle('active', i === step);
-    const tab = document.getElementById('tab-' + i);
-    tab.classList.remove('active', 'done');
-    if (i < step) tab.classList.add('done');
-    if (i === step) tab.classList.add('active');
+function apply(lang){
+  document.documentElement.lang=lang;
+  const t=T[lang];
+  const skip=['freePrice','proPrice','mailSub','mailBody','err-name','err-email','err-prof','err-server','loading'];
+  Object.keys(t).forEach(id=>{
+    if(skip.includes(id))return;
+    const el=document.getElementById(id);
+    if(el&&typeof t[id]==='string')el.innerHTML=t[id];
   });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Prices
+  const fp=document.getElementById('fp');
+  if(fp)fp.innerHTML=`${t.freePrice} <span id="fp-per">${t['fp-per']}</span>`;
+  const pp=document.getElementById('pp');
+  if(pp)pp.innerHTML=`${t.proPrice} <span id="pp-per">${t['pp-per']}</span>`;
 }
 
-async function submitForm() {
-  const t = T[lang];
-  const name = document.getElementById('input-name').value.trim();
-  const email = document.getElementById('input-email').value.trim();
-  const profession = document.getElementById('input-profession').value;
-  const errEl = document.getElementById('form-error');
-  const btn = document.getElementById('submit-btn');
-  const spinner = document.getElementById('spinner');
-  const submitText = document.getElementById('submit-text');
+function goStep(n){
+  [1,2,3].forEach(i=>{
+    document.getElementById('p'+i).classList.toggle('on',i===n);
+    const ws=document.getElementById('ws'+i);
+    ws.classList.remove('active','done');
+    if(i<n)ws.classList.add('done');
+    if(i===n)ws.classList.add('active');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-  errEl.style.display = 'none';
-
-  if (!name) { errEl.textContent = t['err-name']; errEl.style.display = 'block'; return; }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = t['err-email']; errEl.style.display = 'block'; return; }
-  if (!profession) { errEl.textContent = t['err-profession']; errEl.style.display = 'block'; return; }
-
-  btn.disabled = true;
-  submitText.textContent = t['loading'];
-  spinner.style.display = 'block';
-
-  try {
-    // Save to Supabase
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/registrations`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        profession,
-        lang,
-        source: 'landing_register',
-        created_at: new Date().toISOString()
-      })
+async function submitForm(){
+  const lang=getLang();const t=T[lang];
+  const name=document.getElementById('inp-name').value.trim();
+  const email=document.getElementById('inp-email').value.trim();
+  const prof=document.getElementById('inp-prof').value;
+  const err=document.getElementById('err-msg');
+  const btn=document.getElementById('sub-btn');
+  const sp=document.getElementById('spinner');
+  const txt=document.getElementById('sub-txt');
+  err.style.display='none';
+  if(!name){err.textContent=t['err-name'];err.style.display='block';return;}
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent=t['err-email'];err.style.display='block';return;}
+  if(!prof){err.textContent=t['err-prof'];err.style.display='block';return;}
+  btn.disabled=true;txt.textContent=t.loading;sp.style.display='block';
+  try{
+    const res=await fetch(`${SUPA_URL}/rest/v1/registrations`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=minimal'},
+      body:JSON.stringify({name,email,profession:prof,lang,source:'landing_register',created_at:new Date().toISOString()})
     });
-
-    if (!res.ok && res.status !== 201) {
-      throw new Error('Supabase error: ' + res.status);
-    }
-
-    // Send confirmation email via mailto (opens email client)
-    // For a real send, this would use a Supabase Edge Function or EmailJS
-    // Here we do a silent mailto fallback
-    const subject = lang === 'it'
-      ? encodeURIComponent('Benvenuto in KIPRI! Il tuo account è pronto 🦘')
-      : encodeURIComponent('Welcome to KIPRI! Your account is ready 🦘');
-    const body = lang === 'it'
-      ? encodeURIComponent(`Ciao ${name}!\n\nGrazie per esserti registrato a KIPRI.\n\nIl tuo account è stato creato. Puoi accedere subito all'app:\nhttps://kipri.app\n\nSe hai domande, rispondi a questa email.\n\nBenvenuto nel team KIPRI 🦘\n— Matteo e il team KIPRI`)
-      : encodeURIComponent(`Hi ${name}!\n\nThank you for signing up for KIPRI.\n\nYour account has been created. You can access the app now:\nhttps://kipri.app\n\nIf you have any questions, just reply to this email.\n\nWelcome to the KIPRI team 🦘\n— Matteo and the KIPRI team`);
-
-    // Also send notification to kipri@kipri.app
-    const notifSubject = encodeURIComponent(`[KIPRI] Nuova registrazione: ${name}`);
-    const notifBody = encodeURIComponent(`Nuova registrazione:\n\nNome: ${name}\nEmail: ${email}\nSettore: ${profession}\nLingua: ${lang}\nData: ${new Date().toLocaleString('it-IT')}`);
-
-    // Show success
-    document.getElementById('success-email-display').textContent = email;
-    goToStep(3);
-
-    // Open mailto to send confirmation (best-effort)
-    setTimeout(() => {
-      window.open(`mailto:${email}?subject=${subject}&body=${body}`, '_blank');
-    }, 800);
-
-  } catch (e) {
-    btn.disabled = false;
-    submitText.innerHTML = t['submit-text'];
-    spinner.style.display = 'none';
-    errEl.textContent = t['err-server'];
-    errEl.style.display = 'block';
-    console.error(e);
+    if(!res.ok&&res.status!==201)throw new Error(res.status);
+    document.getElementById('s-email').textContent=email;
+    goStep(3);
+    setTimeout(()=>{
+      const sub=encodeURIComponent(t.mailSub);
+      const body=encodeURIComponent(t.mailBody(name));
+      window.open(`mailto:${email}?subject=${sub}&body=${body}`,'_blank');
+    },600);
+  }catch(e){
+    btn.disabled=false;txt.textContent=t['sub-txt'];sp.style.display='none';
+    err.textContent=t['err-server'];err.style.display='block';
   }
 }
 
-// Init lang on load
-window.addEventListener('DOMContentLoaded', () => setLang(lang));
+window.addEventListener('DOMContentLoaded',()=>apply(getLang()));
 </script>
 </body>
 </html>
