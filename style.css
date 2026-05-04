@@ -418,6 +418,27 @@ footer { background:var(--black); padding:64px 56px 40px; }
   .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 }
 
+/* ══ NAV MOBILE FIX ══ */
+@media (max-width: 600px) {
+  nav { padding: 0 16px; height: 60px; }
+  .nav-logo img { height: 28px; }
+  .nav-logo-text { font-size: 18px; }
+  .btn-ghost { display: none; }
+  .btn-primary { padding: 8px 14px; font-size: 13px; border-radius: 10px; white-space: nowrap; }
+  .nav-cta { gap: 8px; }
+  .lang-switcher { padding: 2px; }
+  .lang-btn { padding: 3px 7px; font-size: 14px; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-10px); }
+}
+
 /* ══════════════════════════════════════════
    SWITCHER LINGUA
 ══════════════════════════════════════════ */
