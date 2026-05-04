@@ -453,7 +453,7 @@ const T={
 function getLang(){
   const p=new URLSearchParams(window.location.search).get('lang');
   if(p==='en'||p==='it'){localStorage.setItem('kipri_lang',p);return p;}
-  return localStorage.getItem('kipri_lang')||'it';
+  return localStorage.getItem('kipri_lang')||'en';
 }
 
 function apply(lang){
