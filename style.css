@@ -484,3 +484,4 @@ footer { background:var(--black); padding:64px 56px 40px; }
 .pricing-btn-pro { display: block; text-align: center; padding: 14px; border-radius: 14px; background: linear-gradient(135deg, #5D5C9E 0%, #3d3b7a 100%); color: white; font-weight: 800; font-size: 15px; text-decoration: none; transition: all 0.2s; font-family: 'Baloo 2', sans-serif; box-shadow: 0 4px 16px rgba(93,92,158,0.3); }
 .pricing-btn-pro:hover { opacity: 0.92; }
 .pricing-guarantee { font-size: 11px; color: #94A3B8; text-align: center; margin-top: 12px; }
+/* cache-bust Mon 11 May 2026 16:03:12 BST */
