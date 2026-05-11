@@ -490,3 +490,7 @@ footer { background:var(--black); padding:64px 56px 40px; }
 .pricing-wrap { text-align: center; }
 .pricing-inner { max-width: 860px; margin: 0 auto; }
 .pricing-grid { text-align: left; }
+
+/* ── PRICING CENTRATO FIX ── */
+.pricing-wrap { display: flex; flex-direction: column; align-items: center; }
+.pricing-inner { width: 100%; max-width: 860px; }
