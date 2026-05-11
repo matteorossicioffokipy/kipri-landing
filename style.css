@@ -485,3 +485,8 @@ footer { background:var(--black); padding:64px 56px 40px; }
 .pricing-btn-pro:hover { opacity: 0.92; }
 .pricing-guarantee { font-size: 11px; color: #94A3B8; text-align: center; margin-top: 12px; }
 /* cache-bust Mon 11 May 2026 16:03:12 BST */
+
+/* ── PRICING FIX CENTRATO ── */
+.pricing-wrap { text-align: center; }
+.pricing-inner { max-width: 860px; margin: 0 auto; }
+.pricing-grid { text-align: left; }
