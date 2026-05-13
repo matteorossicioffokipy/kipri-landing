@@ -1,126 +1,339 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KIPRI · Payment</title>
-  <link rel="icon" type="image/png" href="assets/images/kipri-logo-favicon.png"/>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Baloo 2', sans-serif;
-      background-color: #F1F5F9;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      position: relative;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background-image: url('kipri-pattern.svg');
-      background-repeat: repeat;
-      background-size: 400px 400px;
-      opacity: 0.70;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .page-content {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .kipri-logo { margin-bottom: 20px; height: 36px; object-fit: contain; }
-    .card {
-      background: white;
-      border-radius: 28px;
-      padding: 32px 24px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 8px 40px rgba(93,92,158,0.15);
-    }
-    .biz-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 24px; }
-    .biz-logo { width: 72px; height: 72px; border-radius: 20px; object-fit: contain; background: #F8F9FF; border: 2px solid #EEEEF8; padding: 6px; }
-    .biz-initial { width: 72px; height: 72px; border-radius: 20px; background: linear-gradient(135deg, #5D5C9E 0%, #3d3b7a 100%); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 900; color: white; }
-    .biz-name { font-size: 18px; font-weight: 800; color: #1E293B; text-align: center; }
-    .amount-box { background: #EEEEF8; border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 24px; border: 2px solid #C7C7E8; }
-    .amount-label { font-size: 11px; color: #5D5C9E; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-    .amount-value { font-size: 44px; font-weight: 900; color: #3d3b7a; line-height: 1; }
-    .amount-desc { font-size: 14px; color: #5D5C9E; margin-top: 8px; font-weight: 600; }
-    .methods-label { font-size: 12px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; text-align: center; }
-    .methods-list { display: flex; flex-direction: column; gap: 10px; }
-    .method-btn { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-radius: 16px; text-decoration: none; font-weight: 800; font-size: 15px; font-family: 'Baloo 2', sans-serif; transition: transform 0.15s; cursor: pointer; }
-    .method-btn-primary { background: linear-gradient(135deg, #5D5C9E 0%, #3d3b7a 100%); color: white; box-shadow: 0 4px 16px rgba(93,92,158,0.35); }
-    .method-btn-secondary { background: #F8F9FF; color: #1E293B; border: 1.5px solid #EEEEF8; }
-    .method-btn:active { transform: scale(0.97); }
-    .method-left { display: flex; align-items: center; gap: 12px; }
-    .method-emoji { font-size: 22px; }
-    .footer { text-align: center; margin-top: 20px; font-size: 12px; color: #94A3B8; }
-    .footer a { color: #5D5C9E; text-decoration: none; font-weight: 700; }
-    .state-box { text-align: center; padding: 20px; }
-    .state-icon { font-size: 48px; margin-bottom: 12px; }
-    .state-title { font-size: 20px; font-weight: 800; color: #1E293B; margin-bottom: 8px; }
-    .state-sub { font-size: 14px; color: #94A3B8; line-height: 1.5; }
-    .loading { text-align: center; padding: 40px; color: #94A3B8; font-size: 15px; font-weight: 600; }
-    .spinner { width: 36px; height: 36px; border: 3px solid #EEEEF8; border-top-color: #5D5C9E; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-  </style>
-</head>
-<body>
-  <div class="page-content">
-    <img src="assets/logo.png" alt="KIPRI" class="kipri-logo" />
-    <div class="card" id="card">
-      <div class="loading"><div class="spinner"></div>Loading payment…</div>
-    </div>
-    <div class="footer">Powered by <a href="https://www.kipri.app">KIPRI</a> · your business in your pocket</div>
-  </div>
-  <script>
-    const SUPABASE_URL = 'https://tisfpjvwmkzbwedpuoww.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpc2ZwanZ3bWt6YndlZHB1b3d3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1OTkwNzIsImV4cCI6MjA5MjE3NTA3Mn0.Mv_0KxpRqwTbKceom8dRNCRW5WVWnFd1b2YuqW-rSPQ';
-    const getEmoji = (label) => {
-      const l = (label || '').toLowerCase();
-      if (l.includes('revolut')) return '🟣';
-      if (l.includes('paypal')) return '🔵';
-      if (l.includes('monzo')) return '🟠';
-      if (l.includes('sumup')) return '🟢';
-      if (l.includes('stripe')) return '🔷';
-      return '💳';
-    };
-    const buildPayLink = (link, importo) => {
-      if (!link) return '#';
-      if (link.toLowerCase().includes('paypal.me')) return link.replace(/\/$/, '') + '/' + importo;
-      return link + (link.includes('?') ? '&' : '?') + 'amount=' + importo;
-    };
-    async function loadPayment() {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get('id');
-      const card = document.getElementById('card');
-      if (!id) { card.innerHTML = '<div class="state-box"><div class="state-icon">❌</div><div class="state-title">Invalid link</div><div class="state-sub">This payment link is not valid.</div></div>'; return; }
-      try {
-        const res = await fetch(SUPABASE_URL + '/rest/v1/pagamenti_qr?id=eq.' + id + '&select=*', { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY } });
-        const data = await res.json();
-        if (!data || data.length === 0) { card.innerHTML = '<div class="state-box"><div class="state-icon">❌</div><div class="state-title">Not found</div><div class="state-sub">Payment request not found.</div></div>'; return; }
-        const p = data[0];
-        if (new Date(p.scade_at) < new Date()) { card.innerHTML = '<div class="state-box"><div class="state-icon">⏰</div><div class="state-title">Link expired</div><div class="state-sub">This payment link has expired.<br>Please ask for a new one.</div></div>'; return; }
-        const metodi = p.metodi || [];
-        const currency = '£';
-        const logoHtml = p.logo_url ? '<img src="' + p.logo_url + '" class="biz-logo" alt="logo"/>' : '<div class="biz-initial">' + (p.nome_professionista || 'K').charAt(0).toUpperCase() + '</div>';
-        const metodiHtml = metodi.map((m, i) => '<a href="' + buildPayLink(m.link, p.importo) + '" class="method-btn ' + (i === 0 ? 'method-btn-primary' : 'method-btn-secondary') + '" target="_blank" rel="noopener noreferrer"><div class="method-left"><span class="method-emoji">' + getEmoji(m.label) + '</span><span>' + (m.label || 'Pay') + '</span></div><span style="opacity:0.6">→</span></a>').join('');
-        card.innerHTML = '<div class="biz-wrap">' + logoHtml + '<div class="biz-name">' + (p.nome_professionista || '') + '</div></div><div class="amount-box"><div class="amount-label">Amount due</div><div class="amount-value">' + currency + parseFloat(p.importo).toFixed(2) + '</div>' + (p.descrizione ? '<div class="amount-desc">' + p.descrizione + '</div>' : '') + '</div><div class="methods-label">Choose how to pay</div><div class="methods-list">' + metodiHtml + '</div>';
-      } catch (err) {
-        card.innerHTML = '<div class="state-box"><div class="state-icon">⚠️</div><div class="state-title">Error</div><div class="state-sub">Could not load payment. Please try again.</div></div>';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KIPRI · Payment</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/images/kipri-logo-favicon.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-    }
-    loadPayment();
-  </script>
-</body>
+      body {
+        font-family: "Baloo 2", sans-serif;
+        background-color: #f1f5f9;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("kipri-pattern.svg");
+        background-repeat: repeat;
+        background-size: 400px 400px;
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .page-content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .kipri-logo {
+        margin-bottom: 20px;
+        height: 36px;
+        object-fit: contain;
+      }
+      .card {
+        background: white;
+        border-radius: 28px;
+        padding: 32px 24px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 8px 40px rgba(93, 92, 158, 0.15);
+      }
+      .biz-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .biz-logo {
+        width: 72px;
+        height: 72px;
+        border-radius: 20px;
+        object-fit: contain;
+        background: #f8f9ff;
+        border: 2px solid #eeeef8;
+        padding: 6px;
+      }
+      .biz-initial {
+        width: 72px;
+        height: 72px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #5d5c9e 0%, #3d3b7a 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 900;
+        color: white;
+      }
+      .biz-name {
+        font-size: 18px;
+        font-weight: 800;
+        color: #1e293b;
+        text-align: center;
+      }
+      .amount-box {
+        background: #eeeef8;
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 24px;
+        border: 2px solid #c7c7e8;
+      }
+      .amount-label {
+        font-size: 11px;
+        color: #5d5c9e;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+      }
+      .amount-value {
+        font-size: 44px;
+        font-weight: 900;
+        color: #3d3b7a;
+        line-height: 1;
+      }
+      .amount-desc {
+        font-size: 14px;
+        color: #5d5c9e;
+        margin-top: 8px;
+        font-weight: 600;
+      }
+      .methods-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+      .methods-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .method-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 18px;
+        border-radius: 16px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 15px;
+        font-family: "Baloo 2", sans-serif;
+        transition: transform 0.15s;
+        cursor: pointer;
+      }
+      .method-btn-primary {
+        background: linear-gradient(135deg, #5d5c9e 0%, #3d3b7a 100%);
+        color: white;
+        box-shadow: 0 4px 16px rgba(93, 92, 158, 0.35);
+      }
+      .method-btn-secondary {
+        background: #f8f9ff;
+        color: #1e293b;
+        border: 1.5px solid #eeeef8;
+      }
+      .method-btn:active {
+        transform: scale(0.97);
+      }
+      .method-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .method-emoji {
+        font-size: 22px;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 12px;
+        color: #94a3b8;
+      }
+      .footer a {
+        color: #5d5c9e;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .state-box {
+        text-align: center;
+        padding: 20px;
+      }
+      .state-icon {
+        font-size: 48px;
+        margin-bottom: 12px;
+      }
+      .state-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 8px;
+      }
+      .state-sub {
+        font-size: 14px;
+        color: #94a3b8;
+        line-height: 1.5;
+      }
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #94a3b8;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .spinner {
+        width: 36px;
+        height: 36px;
+        border: 3px solid #eeeef8;
+        border-top-color: #5d5c9e;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto 16px;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-content">
+      <img src="assets/logo.png" alt="KIPRI" class="kipri-logo" />
+      <div class="card" id="card">
+        <div class="loading">
+          <div class="spinner"></div>
+          Loading payment…
+        </div>
+      </div>
+      <div class="footer">
+        Powered by <a href="https://www.kipri.app">KIPRI</a> · your business in
+        your pocket
+      </div>
+    </div>
+    <script>
+      const SUPABASE_URL = "https://tisfpjvwmkzbwedpuoww.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpc2ZwanZ3bWt6YndlZHB1b3d3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1OTkwNzIsImV4cCI6MjA5MjE3NTA3Mn0.Mv_0KxpRqwTbKceom8dRNCRW5WVWnFd1b2YuqW-rSPQ";
+      const getEmoji = (label) => {
+        const l = (label || "").toLowerCase();
+        if (l.includes("revolut")) return "🟣";
+        if (l.includes("paypal")) return "🔵";
+        if (l.includes("monzo")) return "🟠";
+        if (l.includes("sumup")) return "🟢";
+        if (l.includes("stripe")) return "🔷";
+        return "💳";
+      };
+      const buildPayLink = (link, importo) => {
+        if (!link) return "#";
+        if (link.toLowerCase().includes("paypal.me"))
+          return link.replace(/\/$/, "") + "/" + importo;
+        return link + (link.includes("?") ? "&" : "?") + "amount=" + importo;
+      };
+      async function loadPayment() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        const card = document.getElementById("card");
+        if (!id) {
+          card.innerHTML =
+            '<div class="state-box"><div class="state-icon">❌</div><div class="state-title">Invalid link</div><div class="state-sub">This payment link is not valid.</div></div>';
+          return;
+        }
+        try {
+          const res = await fetch(
+            SUPABASE_URL + "/rest/v1/pagamenti_qr?id=eq." + id + "&select=*",
+            {
+              headers: {
+                apikey: SUPABASE_ANON_KEY,
+                Authorization: "Bearer " + SUPABASE_ANON_KEY,
+              },
+            },
+          );
+          const data = await res.json();
+          if (!data || data.length === 0) {
+            card.innerHTML =
+              '<div class="state-box"><div class="state-icon">❌</div><div class="state-title">Not found</div><div class="state-sub">Payment request not found.</div></div>';
+            return;
+          }
+          const p = data[0];
+          if (new Date(p.scade_at) < new Date()) {
+            card.innerHTML =
+              '<div class="state-box"><div class="state-icon">⏰</div><div class="state-title">Link expired</div><div class="state-sub">This payment link has expired.<br>Please ask for a new one.</div></div>';
+            return;
+          }
+          const metodi = p.metodi || [];
+          const currency = "£";
+          const logoHtml = p.logo_url
+            ? '<img src="' + p.logo_url + '" class="biz-logo" alt="logo"/>'
+            : '<div class="biz-initial">' +
+              (p.nome_professionista || "K").charAt(0).toUpperCase() +
+              "</div>";
+          const metodiHtml = metodi
+            .map(
+              (m, i) =>
+                '<a href="' +
+                buildPayLink(m.link, p.importo) +
+                '" class="method-btn ' +
+                (i === 0 ? "method-btn-primary" : "method-btn-secondary") +
+                '" target="_blank" rel="noopener noreferrer"><div class="method-left"><span class="method-emoji">' +
+                getEmoji(m.label) +
+                "</span><span>" +
+                (m.label || "Pay") +
+                '</span></div><span style="opacity:0.6">→</span></a>',
+            )
+            .join("");
+          card.innerHTML =
+            '<div class="biz-wrap">' +
+            logoHtml +
+            '<div class="biz-name">' +
+            (p.nome_professionista || "") +
+            '</div></div><div class="amount-box"><div class="amount-label">Amount due</div><div class="amount-value">' +
+            currency +
+            parseFloat(p.importo).toFixed(2) +
+            "</div>" +
+            (p.descrizione
+              ? '<div class="amount-desc">' + p.descrizione + "</div>"
+              : "") +
+            '</div><div class="methods-label">Choose how to pay</div><div class="methods-list">' +
+            metodiHtml +
+            "</div>";
+        } catch (err) {
+          card.innerHTML =
+            '<div class="state-box"><div class="state-icon">⚠️</div><div class="state-title">Error</div><div class="state-sub">Could not load payment. Please try again.</div></div>';
+        }
+      }
+      loadPayment();
+    </script>
+  </body>
 </html>
