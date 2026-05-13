@@ -8,16 +8,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: 'Baloo 2', sans-serif;
-      background: #F0F0FA;
+      background-color: #F1F5F9;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 24px;
+      position: relative;
     }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-image: url('/kipri-pattern.svg');
+      background-repeat: repeat;
+      background-size: 400px 400px;
+      opacity: 0.40;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .kipri-logo {
+      margin-bottom: 20px;
+      height: 36px;
+    }
+
     .card {
       background: white;
       border-radius: 28px;
@@ -26,25 +56,26 @@
       max-width: 400px;
       box-shadow: 0 8px 40px rgba(93,92,158,0.15);
     }
-    .logo-wrap {
+
+    .biz-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 24px;
     }
+
     .biz-logo {
-      width: 72px;
-      height: 72px;
+      width: 72px; height: 72px;
       border-radius: 20px;
       object-fit: contain;
       background: #F8F9FF;
       border: 2px solid #EEEEF8;
       padding: 6px;
     }
+
     .biz-initial {
-      width: 72px;
-      height: 72px;
+      width: 72px; height: 72px;
       border-radius: 20px;
       background: linear-gradient(135deg, #5D5C9E 0%, #3d3b7a 100%);
       display: flex;
@@ -54,37 +85,46 @@
       font-weight: 900;
       color: white;
     }
+
     .biz-name {
       font-size: 18px;
       font-weight: 800;
       color: #1E293B;
       text-align: center;
     }
+
     .amount-box {
-      background: linear-gradient(135deg, #5D5C9E 0%, #3d3b7a 100%);
+      background: #EEEEF8;
       border-radius: 20px;
       padding: 20px;
       text-align: center;
       margin-bottom: 24px;
+      border: 2px solid #C7C7E8;
     }
+
     .amount-label {
       font-size: 13px;
-      color: rgba(255,255,255,0.7);
-      font-weight: 600;
+      color: #5D5C9E;
+      font-weight: 700;
       margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
+
     .amount-value {
       font-size: 44px;
       font-weight: 900;
-      color: white;
+      color: #3d3b7a;
       line-height: 1;
     }
+
     .amount-desc {
       font-size: 14px;
-      color: rgba(255,255,255,0.8);
+      color: #5D5C9E;
       margin-top: 8px;
       font-weight: 600;
     }
+
     .methods-label {
       font-size: 12px;
       font-weight: 700;
@@ -94,11 +134,13 @@
       margin-bottom: 12px;
       text-align: center;
     }
+
     .methods-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
+
     .method-btn {
       display: flex;
       align-items: center;
@@ -109,45 +151,50 @@
       font-weight: 800;
       font-size: 15px;
       font-family: 'Baloo 2', sans-serif;
-      transition: transform 0.15s, box-shadow 0.15s;
+      transition: transform 0.15s;
       cursor: pointer;
     }
-    .method-btn:first-child {
+
+    .method-btn-primary {
       background: linear-gradient(135deg, #5D5C9E 0%, #3d3b7a 100%);
       color: white;
       box-shadow: 0 4px 16px rgba(93,92,158,0.35);
     }
-    .method-btn:not(:first-child) {
+
+    .method-btn-secondary {
       background: #F8F9FF;
       color: #1E293B;
       border: 1.5px solid #EEEEF8;
     }
+
     .method-btn:active { transform: scale(0.97); }
+
     .method-left {
       display: flex;
       align-items: center;
       gap: 12px;
     }
+
     .method-emoji { font-size: 22px; }
     .method-arrow { font-size: 16px; opacity: 0.6; }
+
     .footer {
       text-align: center;
-      margin-top: 24px;
+      margin-top: 20px;
       font-size: 12px;
       color: #94A3B8;
     }
-    .footer a {
-      color: #5D5C9E;
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .expired {
+
+    .footer a { color: #5D5C9E; text-decoration: none; font-weight: 700; }
+
+    .state-box {
       text-align: center;
       padding: 20px;
     }
-    .expired-icon { font-size: 48px; margin-bottom: 12px; }
-    .expired-title { font-size: 20px; font-weight: 800; color: #1E293B; margin-bottom: 8px; }
-    .expired-sub { font-size: 14px; color: #94A3B8; }
+    .state-icon { font-size: 48px; margin-bottom: 12px; }
+    .state-title { font-size: 20px; font-weight: 800; color: #1E293B; margin-bottom: 8px; }
+    .state-sub { font-size: 14px; color: #94A3B8; line-height: 1.5; }
+
     .loading { text-align: center; padding: 40px; color: #94A3B8; font-size: 15px; font-weight: 600; }
     .spinner {
       width: 36px; height: 36px;
@@ -161,15 +208,24 @@
   </style>
 </head>
 <body>
-  <div class="card" id="card">
-    <div class="loading">
-      <div class="spinner"></div>
-      Loading payment…
-    </div>
-  </div>
+  <div class="page-content">
 
-  <div class="footer">
-    Powered by <a href="https://www.kipri.app">KIPRI</a> · your business in your pocket
+    <!-- Logo KIPRI -->
+    <img src="assets/logo.png" alt="KIPRI" class="kipri-logo" />
+
+    <!-- Card principale -->
+    <div class="card" id="card">
+      <div class="loading">
+        <div class="spinner"></div>
+        Loading payment…
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      Powered by <a href="https://www.kipri.app">KIPRI</a> · your business in your pocket
+    </div>
+
   </div>
 
   <script>
@@ -190,14 +246,9 @@
       if (!link) return '#';
       const l = link.toLowerCase();
       if (l.includes('paypal.me')) {
-        const base = link.replace(/\/$/, '');
-        return `${base}/${importo}`;
+        return link.replace(/\/$/, '') + '/' + importo;
       }
-      return `${link}${link.includes('?') ? '&' : '?'}amount=${importo}`;
-    };
-
-    const formatAmount = (amount) => {
-      return parseFloat(amount).toFixed(2);
+      return link + (link.includes('?') ? '&' : '?') + 'amount=' + importo;
     };
 
     async function loadPayment() {
@@ -206,65 +257,64 @@
       const card = document.getElementById('card');
 
       if (!id) {
-        card.innerHTML = `<div class="expired"><div class="expired-icon">❌</div><div class="expired-title">Link non valido</div><div class="expired-sub">Invalid payment link</div></div>`;
+        card.innerHTML = '<div class="state-box"><div class="state-icon">❌</div><div class="state-title">Invalid link</div><div class="state-sub">This payment link is not valid.</div></div>';
         return;
       }
 
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/pagamenti_qr?id=eq.${id}&select=*`, {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/pagamenti_qr?id=eq.' + id + '&select=*', {
           headers: {
             'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
           }
         });
         const data = await res.json();
 
         if (!data || data.length === 0) {
-          card.innerHTML = `<div class="expired"><div class="expired-icon">❌</div><div class="expired-title">Link non trovato</div><div class="expired-sub">Payment not found</div></div>`;
+          card.innerHTML = '<div class="state-box"><div class="state-icon">❌</div><div class="state-title">Not found</div><div class="state-sub">Payment request not found.</div></div>';
           return;
         }
 
         const p = data[0];
-        const scaduto = new Date(p.scade_at) < new Date();
 
-        if (scaduto) {
-          card.innerHTML = `<div class="expired"><div class="expired-icon">⏰</div><div class="expired-title">Link scaduto</div><div class="expired-sub">This payment link has expired.<br>Please ask for a new one.</div></div>`;
+        if (new Date(p.scade_at) < new Date()) {
+          card.innerHTML = '<div class="state-box"><div class="state-icon">⏰</div><div class="state-title">Link expired</div><div class="state-sub">This payment link has expired.<br>Please ask for a new one.</div></div>';
           return;
         }
 
         const metodi = p.metodi || [];
         const currency = '£';
+
         const logoHtml = p.logo_url
-          ? `<img src="${p.logo_url}" class="biz-logo" alt="logo"/>`
-          : `<div class="biz-initial">${(p.nome_professionista || 'K').charAt(0).toUpperCase()}</div>`;
+          ? '<img src="' + p.logo_url + '" class="biz-logo" alt="logo"/>'
+          : '<div class="biz-initial">' + (p.nome_professionista || 'K').charAt(0).toUpperCase() + '</div>';
 
-        const metodiHtml = metodi.map((m, i) => `
-          <a href="${buildPayLink(m.link, p.importo)}" class="method-btn" target="_blank" rel="noopener noreferrer">
-            <div class="method-left">
-              <span class="method-emoji">${getEmoji(m.label)}</span>
-              <span>${m.label || 'Pay'}</span>
-            </div>
-            <span class="method-arrow">→</span>
-          </a>
-        `).join('');
+        const metodiHtml = metodi.map((m, i) =>
+          '<a href="' + buildPayLink(m.link, p.importo) + '" class="method-btn ' + (i === 0 ? 'method-btn-primary' : 'method-btn-secondary') + '" target="_blank" rel="noopener noreferrer">' +
+            '<div class="method-left">' +
+              '<span class="method-emoji">' + getEmoji(m.label) + '</span>' +
+              '<span>' + (m.label || 'Pay') + '</span>' +
+            '</div>' +
+            '<span class="method-arrow">→</span>' +
+          '</a>'
+        ).join('');
 
-        card.innerHTML = `
-          <div class="logo-wrap">
-            ${logoHtml}
-            <div class="biz-name">${p.nome_professionista || 'Payment'}</div>
-          </div>
-          <div class="amount-box">
-            <div class="amount-label">Amount due</div>
-            <div class="amount-value">${currency}${formatAmount(p.importo)}</div>
-            ${p.descrizione ? `<div class="amount-desc">${p.descrizione}</div>` : ''}
-          </div>
-          <div class="methods-label">Choose how to pay</div>
-          <div class="methods-list">${metodiHtml}</div>
-        `;
+        card.innerHTML =
+          '<div class="biz-wrap">' +
+            logoHtml +
+            '<div class="biz-name">' + (p.nome_professionista || '') + '</div>' +
+          '</div>' +
+          '<div class="amount-box">' +
+            '<div class="amount-label">Amount due</div>' +
+            '<div class="amount-value">' + currency + parseFloat(p.importo).toFixed(2) + '</div>' +
+            (p.descrizione ? '<div class="amount-desc">' + p.descrizione + '</div>' : '') +
+          '</div>' +
+          '<div class="methods-label">Choose how to pay</div>' +
+          '<div class="methods-list">' + metodiHtml + '</div>';
 
       } catch (err) {
         console.error(err);
-        card.innerHTML = `<div class="expired"><div class="expired-icon">⚠️</div><div class="expired-title">Errore</div><div class="expired-sub">Could not load payment. Try again.</div></div>`;
+        card.innerHTML = '<div class="state-box"><div class="state-icon">⚠️</div><div class="state-title">Error</div><div class="state-sub">Could not load payment. Please try again.</div></div>';
       }
     }
 
